@@ -97,10 +97,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.codehaus.janino/janino -->
 		<dependency>
 		    <groupId>org.codehaus.janino</groupId>
 		    <artifactId>janino</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>1.2.41</version>
 		</dependency>
 		
 	</dependencies>
