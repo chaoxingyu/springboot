@@ -74,6 +74,12 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		
+	   <!-- 添加页面模板 thymeleaf -->
+	    <dependency> 
+	     <groupId>org.springframework.boot</groupId> 
+	     <artifactId>spring-boot-starter-thymeleaf</artifactId> 
+	    </dependency>		
+	    
 		<!-- 校验框架validation -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
