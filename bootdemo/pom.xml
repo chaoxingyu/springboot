@@ -11,6 +11,7 @@
 	<name>bootdemo</name>
 	<description>Demo project for Spring Boot</description>
 
+ 	<!-- 继承 spring boot 父包-->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -61,19 +62,40 @@
 	</properties>
 
 	<dependencies>
+	
+		<!-- Spring Boot的核心启动器，包含了自动配置、日志和YAML  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
 
-		<!-- WEB项目模块 -->
+		<!-- 构建web项目模块 包括了Tomcat和spring-webmvc -->
+		<!-- spring-boot-starter-web 默认依赖了tomcat的starter 所以使得项目可以直接运行而不需要部署到tomcat中-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 			
-		<!-- AOP:面向切面编程	统一处理Web请求日志 -->
+		<!-- 包含 spring-aop 和 AspectJ 来支持面向切面编程（AOP） -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
-		
+	
+		<!--spring-boot-configuration:spring boot 配置处理器 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+				
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+				
 	   <!-- 添加页面模板 thymeleaf -->
 	    <dependency> 
 	     <groupId>org.springframework.boot</groupId> 
@@ -93,11 +115,13 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- 使用 Spring Boot 默认的 Tomcat 作为应用服务器。 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- 包含常用的测试所需的依赖，如 JUnit、Hamcrest、Mockito 和 spring-test 等 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -175,7 +199,7 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
-			</plugin>		
+			</plugin>	
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
