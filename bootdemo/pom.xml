@@ -110,13 +110,31 @@
 		    <artifactId>janino</artifactId>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<!-- 阿里json处理 -->
 		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
 		    <version>1.2.41</version>
 		</dependency>
 		
+		<!-- 阿里数据库连接池 -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid</artifactId>
+		    <version>1.1.5</version>
+		</dependency>
+		
+		<!-- jdbc驱动  start -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>	
+		<!-- 添加oracle 12c jdbc driver -->  
+	    <dependency>    
+	        <groupId>com.oracle.jdbc</groupId>    
+	        <artifactId>ojdbc8</artifactId>    
+	        <version>12.2.0.1</version>
+	    </dependency>				
 	</dependencies>
 
 	<build>
