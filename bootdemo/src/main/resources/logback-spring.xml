@@ -92,8 +92,21 @@
     <logger name="org.sccba.zm" level="DEBUG"/>
     -->
     
+    
     <!-- spring -->
     <logger name="org.springframework.web" level="ERROR" />
+    
+    <!-- Druid 连接池 -->
+    <logger name="com.alibaba.druid" level="info" />
+    <!--  
+    <logger name="com.alibaba.druid.sql" level="info" />
+    <logger name="com.alibaba.druid.sql.DataSource" level="info" />
+    <logger name="com.alibaba.druid.sql.Connection" level="info" />
+    <logger name="com.alibaba.druid.sql.Statement" level="info" />
+    <logger name="com.alibaba.druid.sql.ResultSet" level="info" />
+    <logger name="com.alibaba.druid.sql.Connection" level="info" />
+    -->
+    
     
     <logger name="com.cxy.bootdemo" level="info" />
     

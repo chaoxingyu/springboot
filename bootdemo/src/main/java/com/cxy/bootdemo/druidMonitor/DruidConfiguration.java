@@ -65,6 +65,9 @@ public class DruidConfiguration implements EnvironmentAware {
 							Integer.valueOf(propertyResolver.getProperty("maxPoolPreparedStatementPerConnectionSize")));
 		}
 		try {
+			// Druid内置提供了四种LogFilter（Log4jFilter、Log4j2Filter、CommonsLogFilter、Slf4jLogFilter）
+			// 他们的别名分别是log4j、log4j2、slf4j、commonlogging和commonLogging。其中commonlogging和commonLogging只是大小写不同。
+			// https://github.com/alibaba/druid/wiki/%E5%86%85%E7%BD%AEFilter%E7%9A%84%E5%88%AB%E5%90%8D
 			datasource.setFilters(propertyResolver.getProperty("filters"));
 		} catch (SQLException e) {
 			logger.error("阿里数据库连接池Druid 初始化 filter 错误", e);
@@ -72,6 +75,10 @@ public class DruidConfiguration implements EnvironmentAware {
 		}
 		datasource.setConnectionProperties(propertyResolver.getProperty("connectionProperties"));
 		datasource.setUseGlobalDataSourceStat(Boolean.valueOf(propertyResolver.getProperty("useGlobalDataSourceStat")));
+		//  Druid锁的公平模式问题
+		// 	缺省unfair，通过构造函数传入参数指定fair或者unfair；如果DruidDataSource还没有初始化，修改maxWait大于0，自动转换为fair模式
+		//  unfair: 并发性能很好  	fair:公平，但是并发性能很差
+		//  datasource.setUseUnfairLock(true);
 		logger.info("阿里数据库连接池Druid 初始化完毕  !");
 		return datasource;
 	}
