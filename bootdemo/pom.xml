@@ -33,11 +33,10 @@
 			<properties>
 				<profileActive>test</profileActive>
 			</properties>
-			<!--  	-->
+			<!-- 默认配置 -->
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-		
 		</profile>
 		<profile>
 			<!-- 准生产环境 -->
