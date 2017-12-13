@@ -1,4 +1,4 @@
-package com.cxy.bootdemo.druidMonitor;
+package com.cxy.bootdemo.configurations;
 
 import java.sql.SQLException;
 

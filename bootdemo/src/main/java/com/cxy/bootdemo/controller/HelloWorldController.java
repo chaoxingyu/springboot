@@ -94,15 +94,21 @@ B) PUT方式提交时， 根据request header Content-Type的值来判断:
       返回的数据不是html标签的页面，而是其他某种格式的数据时（如json、xml等）使用；
  *
  */
+	
+	
+	
     @RequestMapping(value="/say", method=RequestMethod.POST)
     public String sysHello() {
     		return "Say Hello World";
     }
-    
+
+
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     @ResponseBody
     public String hello(@RequestParam String name) {
         return "Hello " + name;
     }
+    
+
 }
 

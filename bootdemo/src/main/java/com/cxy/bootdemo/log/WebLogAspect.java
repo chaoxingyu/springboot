@@ -75,7 +75,28 @@ public class WebLogAspect {
 
 	// 如果要设置多个切点可以使用 || 拼接
 	// 设置通讯处理切面
-	@Pointcut("execution(public * com.cxy.bootdemo.controller.*.*(..))")
+    /**
+     * Pointcut 是指那些方法需要被执行"AOP",是由"Pointcut Expression"来描述的.
+	   Pointcut可以有下列方式来定义或者通过&& || 和!的方式进行组合. 
+			args()
+			@args()
+			execution()
+			this()
+			target()
+			@target()
+			within()
+			@within()
+			@annotation
+		其中execution 是用的最多的,其格式为:
+	execution(modifier-pattern? ret-type-pattern declaring-type-pattern?  name-pattern(param-pattern) throws-pattern?) 
+	pattern分别表示修饰符匹配（modifier-pattern?）、返回值匹配（ret-type-pattern）、类路径匹配（declaring-type-pattern?）、方法名匹配（name-pattern）、
+	参数匹配（(param-pattern)）、异常类型匹配（throws-pattern?），其中后面跟着“?”的是可选项。
+	returning type pattern,name pattern, and parameters pattern是必须的.
+	ret-type-pattern:可以为*表示任何返回值,全路径的类名等.
+	name-pattern:指定方法名,*代表所以,set*,代表以set开头的所有方法.
+	parameters pattern:指定方法参数(声明的类型),(..)代表所有参数,(*)代表一个参数,(*,String)代表第一个参数为任何值,第二个为String类型.
+	*/
+	@Pointcut("execution(public * com.cxy.bootdemo.controller..*.*(..))")
 	public void webLog() {
 
 	}
@@ -111,6 +132,7 @@ public class WebLogAspect {
 		String str = JSONObject.toJSONString(map);
 		logger.info(scheme + " 上行请求数据: {}", str);
 		Object[] arguments = pjp.getArgs();
+		
 		// 校验上送参数
 		// || !listOfValuesLookupUtil.isValidApplication(arguments[0].toString())
 		if (arguments.length == 0) {
