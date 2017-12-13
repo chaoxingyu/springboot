@@ -4,8 +4,9 @@
 /.mvn
 mvnw
 mvnw.cmd
-/.settings
-/.idea
+.settings
+.idea
+.DS_Store
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
