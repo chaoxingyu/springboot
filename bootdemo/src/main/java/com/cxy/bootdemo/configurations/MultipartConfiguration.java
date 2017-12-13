@@ -5,7 +5,7 @@ import javax.servlet.MultipartConfigElement;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 
 //@Configuration
-public class MultipartConfig {
+public class MultipartConfiguration {
 
 	/**
 	 * springboot 上传文件大小限制解决方法2 
