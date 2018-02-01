@@ -1,6 +1,8 @@
 package com.cxy.bootdemo.configurations;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -15,6 +17,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 
+import com.alibaba.druid.filter.Filter;
+import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
@@ -33,6 +37,32 @@ public class DruidConfiguration implements EnvironmentAware {
 	// 系统环境变量和application配置文件中的变量
 	private RelaxedPropertyResolver propertyResolver;
 
+	@Bean
+	public Slf4jLogFilter logFilter(){
+	    Slf4jLogFilter filter = new Slf4jLogFilter();
+		// 所有DataSource相关的日志  默认为true
+		filter.setDataSourceLogEnabled(true);
+		// 所有连接相关的日志  默认为true
+		filter.setConnectionLogEnabled(true);
+		// 所有连接上发生异常的日志 默认为true
+		filter.setConnectionLogErrorEnabled(true);
+		// 是否打印返回结果   默认为true
+		filter.setResultSetLogEnabled(true);
+		// 所有Statement相关的日志    默认为true
+		filter.setStatementLogEnabled(true);
+		// 所有Statement发生异常的日志   默认为true
+		filter.setStatementLogErrorEnabled(true);
+	    // 是否输出可执行的SQL,默认为false
+		filter.setStatementExecutableSqlLogEnable(false);
+		
+	    filter.setStatementParameterClearLogEnable(true);
+	    filter.setStatementCreateAfterLogEnabled(true);
+	    filter.setStatementCloseAfterLogEnabled(true);
+	    filter.setStatementParameterSetLogEnabled(true);
+	    filter.setStatementPrepareAfterLogEnabled(true);
+	    return  filter;
+	}
+	
 	@Override
 	public void setEnvironment(Environment environment) {
 		this.propertyResolver = new RelaxedPropertyResolver(environment, "spring.datasource.");
@@ -64,6 +94,12 @@ public class DruidConfiguration implements EnvironmentAware {
 			datasource.setMaxPoolPreparedStatementPerConnectionSize(
 							Integer.valueOf(propertyResolver.getProperty("maxPoolPreparedStatementPerConnectionSize")));
 		}
+		/*
+		开启   Druid日志 会打印两遍
+		@SuppressWarnings("serial")
+		List<Filter> list= new ArrayList<Filter>(){{add(logFilter());}};
+		datasource.setProxyFilters(list);
+		*/
 		try {
 			// Druid内置提供了四种LogFilter（Log4jFilter、Log4j2Filter、CommonsLogFilter、Slf4jLogFilter）
 			// 他们的别名分别是log4j、log4j2、slf4j、commonlogging和commonLogging。其中commonlogging和commonLogging只是大小写不同。
