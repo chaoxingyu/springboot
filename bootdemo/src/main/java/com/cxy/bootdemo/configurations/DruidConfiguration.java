@@ -94,8 +94,10 @@ public class DruidConfiguration implements EnvironmentAware {
 			datasource.setMaxPoolPreparedStatementPerConnectionSize(
 							Integer.valueOf(propertyResolver.getProperty("maxPoolPreparedStatementPerConnectionSize")));
 		}
+		// DruidDataSource会定期把监控数据输出到日志中 -- 需要 timeBetweenLogStatsMillis >  0
+		datasource.setTimeBetweenLogStatsMillis(Long.valueOf(propertyResolver.getProperty("timeBetweenLogStatsMillis")));
 		/*
-		开启   Druid日志 会打印两遍
+		开启   Druid日志 会打印两遍 （若同时配置了filters和proxyFilters，是组合关系，并非替换关系）
 		@SuppressWarnings("serial")
 		List<Filter> list= new ArrayList<Filter>(){{add(logFilter());}};
 		datasource.setProxyFilters(list);
@@ -138,11 +140,27 @@ public class DruidConfiguration implements EnvironmentAware {
 
 	@Bean
 	public FilterRegistrationBean filterRegistrationBean() {
+		// 参考 https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter
 		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
 		// 添加过滤规则.
 		filterRegistrationBean.addUrlPatterns("/*");
 		// 添加不需要忽略的格式信息.
 		filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+		// 缺省sessionStatMaxCount是1000个。可以按需要进行配置
+		// filterRegistrationBean.addInitParameter("sessionStatMaxCount", "1000");
+		// 可以关闭session统计功能
+		// filterRegistrationBean.addInitParameter("sessionStatEnable", "false");
+		// 可以配置principalSessionName，使得druid能够知道当前的session的用户是谁。
+		// 根据需要，把其中的xxx.user修改为你user信息保存在session中的sessionName。
+		// 注意：如果你session中保存的是非string类型的对象，需要重载toString方法。
+		// filterRegistrationBean.addInitParameter("principalSessionName", "xxx.user");
+		
+		// 若你的user信息保存在cookie中，你可以配置principalCookieName，使得druid知道当前的user是谁
+		// 根据需要，把其中的xxx.user修改为你user信息保存在cookie中的cookieName
+		// filterRegistrationBean.addInitParameter("principalCookieName", "xxx.user");
+		
+		// druid 0.2.7版本开始支持profile，配置profileEnable能够监控单个url调用的sql列表。
+		// filterRegistrationBean.addInitParameter("profileEnable", "true");
 		return filterRegistrationBean;
 	}
 
