@@ -167,8 +167,21 @@
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
+					<!-- 是否覆盖原有文件
+					<overwrite>true</overwrite>
+					<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+					-->
+					<!-- maven 不处理资源 不重新编译等  一般用于 加解密文件 -->
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>jceks</nonFilteredFileExtension>
+						<!--
+							说明： jceks为文件后缀名
+						-->
+					</nonFilteredFileExtensions>
+					<!-- 字符集 与 过滤空格
 					<encoding>UTF-8</encoding>
 					<useDefaultDelimiters>true</useDefaultDelimiters>
+					-->
 				</configuration>
 			</plugin>					
 		</plugins>
