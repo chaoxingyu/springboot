@@ -2,11 +2,11 @@
 // 此文件是由 JavaTM Architecture for XML Binding (JAXB) 引用实现 v2.2.7 生成的
 // 请访问 <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // 在重新编译源模式时, 对此文件的所有修改都将丢失。
-// 生成时间: 2018.02.09 时间 05:22:42 PM CST 
+// 生成时间: 2018.02.11 时间 05:21:31 PM CST 
 //
 
 
-package com.cxy.baseboot.ws.server;
+package com.cxy.baseBoot.ws.server.model;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the com.cxy.baseboot.ws.server package. 
+ * generated in the com.cxy.baseboot.ws.server.model package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,7 +30,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.cxy.baseboot.ws.server
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.cxy.baseboot.ws.server.model
      * 
      */
     public ObjectFactory() {
@@ -58,6 +58,30 @@ public class ObjectFactory {
      */
     public Country createCountry() {
         return new Country();
+    }
+
+    /**
+     * Create an instance of {@link GetEmployeeRequest }
+     * 
+     */
+    public GetEmployeeRequest createGetEmployeeRequest() {
+        return new GetEmployeeRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetEmployeeResponse }
+     * 
+     */
+    public GetEmployeeResponse createGetEmployeeResponse() {
+        return new GetEmployeeResponse();
+    }
+
+    /**
+     * Create an instance of {@link Employee }
+     * 
+     */
+    public Employee createEmployee() {
+        return new Employee();
     }
 
 }

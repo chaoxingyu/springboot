@@ -191,7 +191,7 @@
 					-->
 				</configuration>
 			</plugin>
-			<!-- tag::xsd[]  jaxb2插件可以根据描述的xsd文件来帮我们生成相应的ws代码 -->
+			<!-- tag::xsd[]  jaxb2插件可以根据描述的xsd文件来帮我们生成相应的ws代码
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
@@ -211,6 +211,7 @@
 					<clearOutputDir>false</clearOutputDir>
 				</configuration>
 			</plugin>
+			-->
 			<!-- end::xsd[] -->
 		</plugins>
 		

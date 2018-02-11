@@ -1,4 +1,4 @@
-package com.cxy.baseBoot.ws.wsConfig;
+package com.cxy.baseBoot.ws.server.config;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -21,6 +21,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
 		servlet.setApplicationContext(applicationContext);
 		servlet.setTransformWsdlLocations(true);
+		// PS:transformWsdlLocations设置成true，就是说当你改变了项目名称或者端口号，你的服务还是可以正常访问的（但是如果你改变了WSDL的访问路径，发布服务的代码也要随之更改的）
 		return new ServletRegistrationBean(servlet, "/ws/*");
 	}
 
@@ -43,4 +44,19 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	public XsdSchema countriesSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("/wsSchema/countries.xsd"));
 	}
+
+	@Bean(name = "employee")
+	public DefaultWsdl11Definition defaultEmployeeWsdl11Definition(XsdSchema employeeSchema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("EmployeePort");
+		wsdl11Definition.setSchema(employeeSchema);
+		return wsdl11Definition;
+	}
+
+	@Bean
+	public XsdSchema employeeSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("/wsSchema/hr.xsd"));
+	}
+
+
 }
