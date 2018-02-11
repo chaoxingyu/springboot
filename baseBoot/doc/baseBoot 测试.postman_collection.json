@@ -1,0 +1,81 @@
+{
+	"id": "3d672852-2d3c-44a5-f201-5edc20cd4924",
+	"name": "baseBoot 测试",
+	"description": "",
+	"order": [
+		"ceb1b059-3901-b9b6-837f-9de1dbf22f3a",
+		"782c0047-2912-a198-9b64-47dbd7e3b04b"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1518337025903,
+	"owner": 0,
+	"public": false,
+	"events": [],
+	"variables": [],
+	"auth": null,
+	"requests": [
+		{
+			"id": "782c0047-2912-a198-9b64-47dbd7e3b04b",
+			"headers": "Content-Type: text/xml\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "text/xml",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/bootApi/ws/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "3d672852-2d3c-44a5-f201-5edc20cd4924",
+			"data": [],
+			"dataMode": "raw",
+			"name": "ws  employee 测试",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1518337075316,
+			"version": 2,
+			"responses": [],
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:gs=\"http://www.baseBoot.cxy.com/ws/server\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <gs:getCountryRequest>\r\n         <gs:name>Spain</gs:name>\r\n      </gs:getCountryRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>"
+		},
+		{
+			"id": "ceb1b059-3901-b9b6-837f-9de1dbf22f3a",
+			"headers": "Content-Type: text/xml\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "text/xml",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/bootApi/ws/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "3d672852-2d3c-44a5-f201-5edc20cd4924",
+			"data": [],
+			"dataMode": "raw",
+			"name": "ws  countries 测试",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1518337051425,
+			"version": 2,
+			"responses": [],
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:gs=\"http://www.baseBoot.cxy.com/ws/server\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <gs:getEmployeeRequest>\r\n         <gs:name>Spain</gs:name>\r\n      </gs:getEmployeeRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>"
+		}
+	]
+}
