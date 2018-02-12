@@ -5,6 +5,11 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import org.springframework.ws.soap.SoapHeader;
+import org.springframework.ws.soap.SoapHeaderElement;
+
+import javax.xml.namespace.QName;
+import java.util.function.Consumer;
 
 @Endpoint
 public class CountryEndpoint {
@@ -20,7 +25,14 @@ public class CountryEndpoint {
     // 注意PayloadRoot注解当中的namespace和localPart需要和xsd中对应。
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
     @ResponsePayload
-    public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request) {
+    public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request, SoapHeader header) {
+        header.examineAllHeaderElements().forEachRemaining(element -> {
+            SoapHeaderElement soapHeaderElement = element;
+
+            System.err.println("soapHeaderElement.getText()-->" + soapHeaderElement.getText());
+        });
+
+        System.err.println(header + "  getSystemId: " + header.getResult().getSystemId());
         GetCountryResponse response = new GetCountryResponse();
         Country poland = new Country();
         poland.setName("Poland-" + request.getName());
@@ -32,17 +44,17 @@ public class CountryEndpoint {
     }
 
 
-   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getEmployeeRequest")
-   @ResponsePayload
-   public GetEmployeeResponse getEmployee(@RequestPayload GetEmployeeRequest getEmployeeRequest){
-       Employee employee = new Employee();
-       employee.setId(1111);
-       employee.setCity("BJ");
-       employee.setSex("0");
-       employee.setName("test");
-       GetEmployeeResponse response = new GetEmployeeResponse();
-       response.setEmployee(employee);
-       return  response;
-   }
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getEmployeeRequest")
+    @ResponsePayload
+    public GetEmployeeResponse getEmployee(@RequestPayload GetEmployeeRequest getEmployeeRequest) {
+        Employee employee = new Employee();
+        employee.setId(1111);
+        employee.setCity("BJ");
+        employee.setSex("0");
+        employee.setName("test");
+        GetEmployeeResponse response = new GetEmployeeResponse();
+        response.setEmployee(employee);
+        return response;
+    }
 
 }

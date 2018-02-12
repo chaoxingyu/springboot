@@ -10,7 +10,15 @@
     <xs:element name="getCountryRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
+                <xs:element name="name" minOccurs="1">
+                    <xs:simpleType >
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                            <xs:maxLength value="64"/>
+                            <xs:pattern value="^[A-Za-z]+$"></xs:pattern>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -23,9 +31,17 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="country">
+    <xs:complexType name="country" >
         <xs:sequence>
-            <xs:element name="name" type="xs:string"/>
+            <xs:element name="name" minOccurs="1">
+                <xs:simpleType >
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="64"/>
+                        <xs:pattern value="^[A-Za-z]+$"></xs:pattern>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
             <xs:element name="population" type="xs:int"  />
             <xs:element name="capital" type="xs:string"/>
             <xs:element name="currency" type="tns:currency"/>
@@ -39,4 +55,6 @@
             <xs:enumeration value="PLN"/>
         </xs:restriction>
     </xs:simpleType>
+
+
 </xs:schema>

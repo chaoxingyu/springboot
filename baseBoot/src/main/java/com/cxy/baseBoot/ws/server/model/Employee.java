@@ -1,10 +1,3 @@
-//
-// 此文件是由 JavaTM Architecture for XML Binding (JAXB) 引用实现 v2.2.7 生成的
-// 请访问 <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// 在重新编译源模式时, 对此文件的所有修改都将丢失。
-// 生成时间: 2018.02.11 时间 05:21:31 PM CST 
-//
-
 
 package com.cxy.baseBoot.ws.server.model;
 
@@ -26,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="sex" type="{http://www.baseBoot.cxy.com/ws/server/model}sex"/>
+ *         &lt;element name="sex" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -37,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "employee", propOrder = {
+@XmlType(name = "employee", namespace = "http://www.baseBoot.cxy.com/ws/server", propOrder = {
     "id",
     "name",
     "sex",
@@ -45,12 +38,13 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Employee {
 
+    @XmlElement(namespace = "http://www.baseBoot.cxy.com/ws/server")
     protected int id;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.baseBoot.cxy.com/ws/server", required = true)
     protected String name;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.baseBoot.cxy.com/ws/server", required = true)
     protected String sex;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.baseBoot.cxy.com/ws/server", required = true)
     protected String city;
 
     /**
