@@ -1,10 +1,3 @@
-//
-// 此文件是由 JavaTM Architecture for XML Binding (JAXB) 引用实现 v2.2.7 生成的
-// 请访问 <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// 在重新编译源模式时, 对此文件的所有修改都将丢失。
-// 生成时间: 2018.02.11 时间 05:21:31 PM CST 
-//
-
 
 package com.cxy.baseBoot.ws.server.model;
 
@@ -25,7 +18,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="name">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               &lt;minLength value="1"/>
+ *               &lt;maxLength value="64"/>
+ *               &lt;pattern value="^[A-Za-z]+$"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,10 +39,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "name"
 })
-@XmlRootElement(name = "getCountryRequest" , namespace = "http://www.baseBoot.cxy.com/ws/server")
+@XmlRootElement(name = "getCountryRequest", namespace = "http://www.baseBoot.cxy.com/ws/server")
 public class GetCountryRequest {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.baseBoot.cxy.com/ws/server", required = true)
     protected String name;
 
     /**

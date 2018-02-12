@@ -23,17 +23,10 @@
         <xs:sequence>
             <xs:element name="id" type="xs:int"/>
             <xs:element name="name" type="xs:string"/>
-            <xs:element name="sex" type="tns:sex"/>
+            <xs:element name="sex" type="xs:string"/>
             <xs:element name="city" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:simpleType name="sex">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="0" />
-            <xs:enumeration value="1"/>
-            <xs:enumeration value="2"/>
-        </xs:restriction>
-    </xs:simpleType>
 
 </xs:schema>

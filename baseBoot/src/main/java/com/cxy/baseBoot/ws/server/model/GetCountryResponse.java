@@ -1,10 +1,3 @@
-//
-// 此文件是由 JavaTM Architecture for XML Binding (JAXB) 引用实现 v2.2.7 生成的
-// 请访问 <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// 在重新编译源模式时, 对此文件的所有修改都将丢失。
-// 生成时间: 2018.02.11 时间 05:21:31 PM CST 
-//
-
 
 package com.cxy.baseBoot.ws.server.model;
 
@@ -25,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="country" type="{http://www.baseBoot.cxy.com/ws/server/model}country"/>
+ *         &lt;element name="country" type="{http://www.baseBoot.cxy.com/ws/server}country"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "getCountryResponse", namespace = "http://www.baseBoot.cxy.com/ws/server")
 public class GetCountryResponse {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.baseBoot.cxy.com/ws/server", required = true)
     protected Country country;
 
     /**
