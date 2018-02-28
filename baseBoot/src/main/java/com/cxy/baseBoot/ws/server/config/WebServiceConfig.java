@@ -1,5 +1,7 @@
 package com.cxy.baseBoot.ws.server.config;
 
+import com.cxy.baseBoot.ws.server.exception.DetailSoapFaultDefinitionExceptionResolver;
+import com.cxy.baseBoot.ws.server.exception.ServiceFaultException;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -7,14 +9,47 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
+import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+import java.util.Properties;
+
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
+
+	/*
+	@Override
+	public void addInterceptors(List<EndpointInterceptor> interceptors) {
+		PayloadValidatingInterceptor validatingInterceptor = new PayloadValidatingInterceptor();
+		validatingInterceptor.setValidateRequest(true);
+		validatingInterceptor.setValidateResponse(true);
+		//validatingInterceptor.setx
+		validatingInterceptor.setXsdSchema(countriesSchema());
+		interceptors.add(validatingInterceptor);
+	}
+	*/
+
+	@Bean
+	public SoapFaultMappingExceptionResolver exceptionResolver(){
+		SoapFaultMappingExceptionResolver exceptionResolver = new DetailSoapFaultDefinitionExceptionResolver();
+
+		SoapFaultDefinition faultDefinition = new SoapFaultDefinition();
+		faultDefinition.setFaultCode(SoapFaultDefinition.SERVER);
+		exceptionResolver.setDefaultFault(faultDefinition);
+
+		Properties errorMappings = new Properties();
+		errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
+		errorMappings.setProperty(ServiceFaultException.class.getName(), SoapFaultDefinition.SERVER.toString());
+
+		exceptionResolver.setExceptionMappings(errorMappings);
+		exceptionResolver.setOrder(1);
+		return exceptionResolver;
+	}
 
 	@Bean
 	public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
@@ -24,6 +59,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		// PS:transformWsdlLocations设置成true，就是说当你改变了项目名称或者端口号，你的服务还是可以正常访问的（但是如果你改变了WSDL的访问路径，发布服务的代码也要随之更改的）
 		return new ServletRegistrationBean(servlet, "/ws/*");
 	}
+
 
 	@Bean(name = "countries")
 	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {

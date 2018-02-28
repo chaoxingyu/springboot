@@ -1,5 +1,7 @@
 package com.cxy.baseBoot.ws.server.endPoint;
 
+import com.cxy.baseBoot.ws.server.exception.ServiceFault;
+import com.cxy.baseBoot.ws.server.exception.ServiceFaultException;
 import com.cxy.baseBoot.ws.server.model.*;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -8,11 +10,12 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import org.springframework.ws.soap.SoapHeader;
 import org.springframework.ws.soap.SoapHeaderElement;
 
-import javax.xml.namespace.QName;
-import java.util.function.Consumer;
-
+/**
+ * soap 统一服务
+ *
+ */
 @Endpoint
-public class CountryEndpoint {
+public class CommonSoapEndpoint {
 
     /*
     @Endpoint：是指消息的接收者，就是SpringWS的endpoint，可以一个或者多个，关键是下面的注解
@@ -28,11 +31,15 @@ public class CountryEndpoint {
     public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request, SoapHeader header) {
         header.examineAllHeaderElements().forEachRemaining(element -> {
             SoapHeaderElement soapHeaderElement = element;
-
             System.err.println("soapHeaderElement.getText()-->" + soapHeaderElement.getText());
         });
 
         System.err.println(header + "  getSystemId: " + header.getResult().getSystemId());
+        if(null == request.getName() || request.getName().equals("")){
+            throw  new ServiceFaultException("ERROR",new ServiceFault(
+                    "NOT_FOUND", "Country with Name: " + request.getName() + " not found."));
+
+        }
         GetCountryResponse response = new GetCountryResponse();
         Country poland = new Country();
         poland.setName("Poland-" + request.getName());
