@@ -119,7 +119,14 @@ public class Date4OldUtil {
 		return month;
 	}
 
-
+	/**
+	 * 字符串 日期 转 Date 日期
+	 * 
+	 * @param inValue
+	 *            字符串日期
+	 * @return Date
+	 * @throws Exception
+	 */
 	public static Date converString2Date(String inValue) throws Exception {
 		if (null == inValue || "".equals(inValue)) {
 			return null;
@@ -172,11 +179,11 @@ public class Date4OldUtil {
 			}
 		}
 		if (value.contains(":")) {
+			if (value.length() == 12) {
+				return str2Date(value, "HH:mm:ss.SSS");
+			}
 			if (value.length() == 10) {
 				return str2Date(value, "HH:mm:ss");
-			}
-			if (value.contains(".") && value.length() == 12) {
-				return str2Date(value, "HH:mm:ss.SSS");
 			}
 		}
 		if (value.contains(" ")) {
@@ -235,9 +242,6 @@ public class Date4OldUtil {
 	 * @return Date
 	 */
 	public static Date str2Date(String dateStr, String formatStr) {
-		if (dateStr.contains("-")) {
-
-		}
 		if (null == formatStr || "".equals(formatStr)) {
 			formatStr = DATE_FORMAT;
 		}
@@ -247,7 +251,6 @@ public class Date4OldUtil {
 			date = dateformat.parse(dateStr);
 		} catch (ParseException e) {
 			e.printStackTrace();
-			System.out.println("!!!!!!!!input \"" + dateStr + "\" is worry! ");
 		}
 		return date;
 	}
@@ -316,7 +319,7 @@ public class Date4OldUtil {
 		System.out.println("Fri Aug 28 2009 23:37:46 GMT".length());
 		try {
 			System.err.println(date2Str(converString2Date("2018年12月11日"), DATE_FORMAT));
-			System.err.println(date2Str(converString2Date("2018/12/12 12:12:12.009"), DATE_TIME_FORMAT+".SSS"));
+			System.err.println(date2Str(converString2Date("2018/12/12 12:12:12.009"), DATE_TIME_FORMAT + ".SSS"));
 			System.err.println(date2Str(converString2Date("2018/12/12 12:12:12"), DATE_TIME_FORMAT));
 			System.err.println(date2Str(converString2Date("2018年12月11日 12时12分12秒"), DATE_TIME_FORMAT));
 		} catch (Exception e) {
