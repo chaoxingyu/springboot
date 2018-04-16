@@ -6,9 +6,26 @@ import java.util.UUID;
 
 public class StringUtil {
 
-	public static boolean isNullOrBlock(Object string) {
-		if (string == null || "".equals(string.toString()))
+	/**
+	 * 生成UUID唯一序号
+	 * 
+	 * @return String
+	 */
+	public static String getUUid() {
+		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+
+	/**
+	 * 判断对象是否为空
+	 * 
+	 * @param str
+	 *            对象
+	 * @return boolean
+	 */
+	public static boolean isNullOrBlock(Object str) {
+		if (str == null || "".equals(str.toString())) {
 			return true;
+		}
 		return false;
 	}
 
@@ -16,47 +33,70 @@ public class StringUtil {
 		return !isNullOrBlock(string);
 	}
 
-	public static boolean afterTrimIsNullOrBlock(String string) {
-		if (string == null || "".equals(string))
+	/**
+	 * 字符串去空后判断是否为空
+	 * 
+	 * @param str
+	 *            字符串
+	 * @return boolean
+	 */
+	public static boolean afterTrimIsNullOrBlock(String str) {
+		if (str == null || "".equals(str)) {
 			return true;
-		string = string.trim();
-		if (string == null || "".equals(string))
+		}
+		str = str.trim();
+		if (str == null || "".equals(str)) {
 			return true;
+		}
 		return false;
 	}
 
-	public static boolean afterTrimIsNotNullOrBlock(String string) {
-		return !afterTrimIsNullOrBlock(string);
+	public static boolean afterTrimIsNotNullOrBlock(String str) {
+		return !afterTrimIsNullOrBlock(str);
 	}
 
-	public static String fristCharToUpperCase(String string) {
-		return (string.charAt(0) + "").toUpperCase() + string.substring(1);
+	/**
+	 * 字符串首字母大写
+	 * 
+	 * @param str
+	 *            字符串
+	 * @return String
+	 */
+	public static String fristCharToUpperCase(String str) {
+		return (str.charAt(0) + "").toUpperCase() + str.substring(1);
 	}
 
-	public static String fristCharToLowerCase(String string) {
-		return (string.charAt(0) + "").toLowerCase() + string.substring(1);
+	/**
+	 * 字符串首字母小写
+	 * 
+	 * @param str
+	 *            字符串
+	 * @return String
+	 */
+	public static String fristCharToLowerCase(String str) {
+		return (str.charAt(0) + "").toLowerCase() + str.substring(1);
 	}
 
 	/**
 	 * unicode 转换成 utf-8
 	 * 
-	 * @author fanhui 2007-3-15
-	 * @param theString
-	 * @return
+	 * @param str
+	 *            字符串
+	 * @return String
 	 */
-	public static String unicodeToUtf8(String theString) {
+	public static String unicodeToUtf8(String str) {
 		char aChar;
-		int len = theString.length();
+		int len = str.length();
 		StringBuffer outBuffer = new StringBuffer(len);
 		for (int x = 0; x < len;) {
-			aChar = theString.charAt(x++);
+			aChar = str.charAt(x++);
 			if (aChar == '\\') {
-				aChar = theString.charAt(x++);
+				aChar = str.charAt(x++);
 				if (aChar == 'u') {
 					// Read the xxxx
 					int value = 0;
 					for (int i = 0; i < 4; i++) {
-						aChar = theString.charAt(x++);
+						aChar = str.charAt(x++);
 						switch (aChar) {
 						case '0':
 						case '1':
@@ -108,9 +148,16 @@ public class StringUtil {
 		return outBuffer.toString();
 	}
 
+	/**
+	 * list转String
+	 * 
+	 * @param list
+	 * @return String
+	 */
 	public static String list2String(List<?> list) {
-		if (list == null || list.size() == 0)
+		if (list == null || list.isEmpty()) {
 			return "";
+		}
 		StringBuffer stringBuffer = new StringBuffer();
 		for (Object object : list) {
 			stringBuffer.append(object.toString() + ",");
@@ -120,23 +167,16 @@ public class StringUtil {
 	}
 
 	/**
-	 * 生成UUID唯一序号
-	 */
-	public static String getUUid() {
-		return UUID.randomUUID().toString().replaceAll("-", "");
-	}
-	
-	/**
 	 * 获取数字型随机数字
 	 * 
 	 * @param numLen
 	 *            随机码位数
-	 * @return
-	 * @throws Exception
+	 * @return String
 	 */
 	public static String getRandomNum(int numLen) {
-		if (numLen <= 0 || numLen >= 100)
+		if (numLen < 1 || numLen > 99) {
 			numLen = 6;
+		}
 		String rs = "";
 		for (int i = 0; i < numLen; i++) {
 			Random random = new Random();
@@ -146,8 +186,4 @@ public class StringUtil {
 		return rs;
 	}
 
-	public static void main(String[] args) {
-		Integer i = new Integer(2);
-		System.out.println(i.toString());
-	}
 }
