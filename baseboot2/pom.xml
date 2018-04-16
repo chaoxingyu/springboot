@@ -6,7 +6,7 @@
 	<groupId>com.cxy</groupId>
 	<artifactId>baseboot2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>baseboot2</name>
 	<description>Demo project for Spring Boot 2</description>
@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.RELEASE</version>
+		<version>2.0.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -25,6 +25,15 @@
 	</properties>
 
 	<dependencies>
+	
+		<!--spring-boot-configuration:spring boot 配置处理器 	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<!-- 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
@@ -32,7 +41,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-quartz</artifactId>
-		</dependency>
+		</dependency> 
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
@@ -66,6 +76,7 @@
 		    <version>1.2.41</version>
 		</dependency>
 		
+		<!-- 热部署 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -88,7 +99,25 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+	            <configuration>
+	                <fork>true</fork>
+	            </configuration>				
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>	
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<useDefaultDelimiters>true</useDefaultDelimiters>
+				</configuration>
+			</plugin>					
 		</plugins>
 	</build>
 
