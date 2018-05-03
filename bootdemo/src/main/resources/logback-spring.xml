@@ -140,7 +140,7 @@
 		<logger name="druid.sql.Statement" level="info" />
 		<logger name="druid.sql.ResultSet" level="info" />
 		<!-- 
-			相当于 --》 druid.sql.DataSource、 druid.sql.Connection、druid.sql.Statement、druid.sql.ResultSet 全部配置了
+			相当于   druid.sql.DataSource、 druid.sql.Connection、druid.sql.Statement、druid.sql.ResultSet 全部配置了
 		-->
 	</springProfile>
 
