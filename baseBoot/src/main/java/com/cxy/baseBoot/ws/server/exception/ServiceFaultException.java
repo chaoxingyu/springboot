@@ -2,7 +2,9 @@ package com.cxy.baseBoot.ws.server.exception;
 
 public class ServiceFaultException extends RuntimeException {
 
-    private ServiceFault serviceFault; // 错误实体Bean
+	private static final long serialVersionUID = 5394518972951694190L;
+	
+	private ServiceFault serviceFault; // 错误实体Bean
 
     /**
      * 自定义错误信息

@@ -45,7 +45,8 @@ public class HelloWebServiceClient {
         }
     }
 
-    private void writeHelloResponse(SOAPMessage message) throws SOAPException{
+    @SuppressWarnings("rawtypes")
+	private void writeHelloResponse(SOAPMessage message) throws SOAPException{
         SOAPEnvelope envelope = message.getSOAPPart().getEnvelope();
         Name helloResponseName = envelope.createName("getCountryResponse",PREFIX,NAMESPACE_URI);
         Iterator childElements = message.getSOAPBody().getChildElements(helloResponseName);
